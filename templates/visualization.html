@@ -1,0 +1,500 @@
+{% extends "base.html" %}
+{% block title %}Visualization - {{ result.get('filename', 'untitled') }} - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Analysis Result</span>
+        <h1 class="page-title">{{ result.get('filename', 'untitled') }}</h1>
+        <p class="page-subtitle">
+            <span class="lang-badge lang-{{ result.get('detected_language', 'unknown') }}">{{ result.get('detected_language', 'unknown')|upper }}</span>
+            <span class="meta-sep">&middot;</span>
+            <span>{{ result.get('total_lines', 0) }} lines</span>
+            <span class="meta-sep">&middot;</span>
+            <span>{{ result.get('code_lines', 0) }} code lines</span>
+            <span class="meta-sep">&middot;</span>
+            <span>{{ result.get('functions', [])|length }} functions</span>
+            <span class="meta-sep">&middot;</span>
+            <span>{{ result.get('classes', [])|length }} classes</span>
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <!-- Complexity Banner -->
+    <div class="complexity-banner glass">
+        <div class="complexity-item">
+            <i class="fas fa-clock"></i>
+            <div>
+                <span class="complexity-label">Time Complexity</span>
+                <span class="complexity-value">{{ result.get('complexity', {}).get('time', 'Unknown') }}</span>
+            </div>
+        </div>
+        <div class="complexity-item">
+            <i class="fas fa-memory"></i>
+            <div>
+                <span class="complexity-label">Space Complexity</span>
+                <span class="complexity-value">{{ result.get('complexity', {}).get('space', 'Unknown') }}</span>
+            </div>
+        </div>
+        <div class="complexity-item complexity-desc">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <span class="complexity-label">Analysis</span>
+                <span class="complexity-text">{{ result.get('complexity', {}).get('description', 'Analysis not available') }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visualization Tabs -->
+    <div class="viz-tabs">
+        <button class="viz-tab active" data-viz="overview">
+            <i class="fas fa-chart-bar"></i> Overview
+        </button>
+        <button class="viz-tab" data-viz="functions">
+            <i class="fas fa-code"></i> Functions
+        </button>
+        <button class="viz-tab" data-viz="classes">
+            <i class="fas fa-cube"></i> Classes
+        </button>
+        <button class="viz-tab" data-viz="ast">
+            <i class="fas fa-sitemap"></i> AST Tree
+        </button>
+        <button class="viz-tab" data-viz="callgraph">
+            <i class="fas fa-project-diagram"></i> Call Graph
+        </button>
+        <button class="viz-tab" data-viz="flowchart">
+            <i class="fas fa-route"></i> Flowchart
+        </button>
+        <button class="viz-tab" data-viz="dependencies">
+            <i class="fas fa-network-wired"></i> Dependencies
+        </button>
+        <button class="viz-tab" data-viz="explanations">
+            <i class="fas fa-brain"></i> Explanations
+        </button>
+        <button class="viz-tab" data-viz="linebyline">
+            <i class="fas fa-list-ol"></i> Line by Line
+        </button>
+    </div>
+
+    <!-- Overview Panel -->
+    <div class="viz-panel active" id="viz-overview">
+        <div class="viz-grid-2">
+            <div class="viz-card glass">
+                <h3><i class="fas fa-chart-pie"></i> Code Composition</h3>
+                <div id="metrics-chart" class="chart-container"></div>
+            </div>
+            <div class="viz-card glass">
+                <h3><i class="fas fa-tachometer-alt"></i> Function Complexity</h3>
+                <div id="complexity-chart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <div class="viz-card glass">
+            <h3><i class="fas fa-info-circle"></i> Summary</h3>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span class="summary-label">Total Lines</span>
+                    <span class="summary-value">{{ result.get('total_lines', 0) }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Code Lines</span>
+                    <span class="summary-value">{{ result.get('code_lines', 0) }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Comments</span>
+                    <span class="summary-value">{{ result.get('comment_lines', 0) }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Blank Lines</span>
+                    <span class="summary-value">{{ result.get('blank_lines', 0) }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Functions</span>
+                    <span class="summary-value">{{ result.get('functions', [])|length }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Classes</span>
+                    <span class="summary-value">{{ result.get('classes', [])|length }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Imports</span>
+                    <span class="summary-value">{{ result.imports|length }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Loops</span>
+                    <span class="summary-value">{{ result.get('loops', [])|length }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Functions Panel -->
+    <div class="viz-panel" id="viz-functions">
+        <div class="viz-card glass">
+            <h3><i class="fas fa-code"></i> Functions ({{ result.get('functions', [])|length }})</h3>
+            {% if result.functions %}
+            <div class="function-list">
+                {% for func in result.get('functions', []) %}
+                <div class="function-item">
+                    <div class="function-header">
+                        <span class="function-name">
+                            <i class="fas fa-function"></i> {{ func.name }}()
+                        </span>
+                        <span class="function-line">Line {{ func.line }}{% if func.get('end_line') %}-{{ func.get('end_line', func.get('line', '?')) }}{% endif %}</span>
+                    </div>
+                    <div class="function-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Parameters:</span>
+                            <span class="detail-value">{{ func.args|join(', ') or 'None' }}</span>
+                        </div>
+                        {% if func.get('returns') %}
+                        <div class="detail-row">
+                            <span class="detail-label">Returns:</span>
+                            <span class="detail-value">{{ func.get('returns', 'None') }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="detail-row">
+                            <span class="detail-label">Complexity:</span>
+                            <span class="detail-value complexity-badge complexity-{{ 'high' if func.get('complexity', 1) > 10 else 'medium' if func.get('complexity', 1) > 5 else 'low' }}">
+                                {{ func.get('complexity', 1) }}
+                            </span>
+                        </div>
+                        {% if func.get('calls') %}
+                        <div class="detail-row">
+                            <span class="detail-label">Calls:</span>
+                            <span class="detail-value">{{ func.get('calls', [])|join(', ') }}</span>
+                        </div>
+                        {% endif %}
+                        {% if func.get('docstring') %}
+                        <div class="detail-row">
+                            <span class="detail-label">Docstring:</span>
+                            <span class="detail-value docstring">{{ func.get('docstring', '') }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state"><p>No functions found.</p></div>
+            {% endif %}
+        </div>
+
+        {% if visualizations.function_hierarchy and not visualizations.function_hierarchy.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-sitemap"></i> Function Hierarchy</h3>
+            <div id="function-hierarchy-chart" class="chart-container"></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Classes Panel -->
+    <div class="viz-panel" id="viz-classes">
+        <div class="viz-card glass">
+            <h3><i class="fas fa-cube"></i> Classes ({{ result.get('classes', [])|length }})</h3>
+            {% if result.classes %}
+            <div class="class-list">
+                {% for cls in result.get('classes', []) %}
+                <div class="class-item">
+                    <div class="class-header">
+                        <span class="class-name"><i class="fas fa-cube"></i> {{ cls.name }}</span>
+                        <span class="class-line">Line {{ cls.line }}</span>
+                    </div>
+                    {% if cls.get('bases') %}
+                    <div class="class-bases">
+                        <span class="detail-label">Inherits:</span>
+                        <span>{{ cls.get('bases', [])|join(', ') }}</span>
+                    </div>
+                    {% endif %}
+                    {% if cls.methods %}
+                    <div class="class-methods">
+                        <span class="detail-label">Methods ({{ cls.get('methods', [])|length }}):</span>
+                        <div class="method-tags">
+                            {% for method in cls.get('methods', []) %}
+                            <span class="method-tag">{{ method.name }}()</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if cls.get('docstring') %}
+                    <div class="class-docstring">{{ cls.get('docstring', '') }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state"><p>No classes found.</p></div>
+            {% endif %}
+        </div>
+
+        {% if visualizations.class_hierarchy and not visualizations.class_hierarchy.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-project-diagram"></i> Class Hierarchy</h3>
+            <div id="class-hierarchy-chart" class="chart-container"></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- AST Panel -->
+    <div class="viz-panel" id="viz-ast">
+        {% if visualizations.ast_tree and not visualizations.ast_tree.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-sitemap"></i> Abstract Syntax Tree</h3>
+            <div id="ast-chart" class="chart-container"></div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-sitemap"></i> AST Visualization</h3>
+            <div class="empty-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>AST visualization is only available for valid Python code.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Call Graph Panel -->
+    <div class="viz-panel" id="viz-callgraph">
+        {% if visualizations.call_graph and not visualizations.call_graph.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-project-diagram"></i> Function Call Graph</h3>
+            <div id="call-graph-chart" class="chart-container"></div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-project-diagram"></i> Call Graph</h3>
+            <div class="empty-state">
+                <i class="fas fa-info-circle"></i>
+                <p>No function calls detected or not enough functions for a graph.</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Flowchart Panel -->
+    <div class="viz-panel" id="viz-flowchart">
+        {% if visualizations.flowchart and not visualizations.flowchart.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-route"></i> Execution Flowchart</h3>
+            <div id="flowchart-chart" class="chart-container"></div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-route"></i> Execution Flowchart</h3>
+            <div class="empty-state">
+                <i class="fas fa-info-circle"></i>
+                <p>{{ visualizations.flowchart.error if visualizations.flowchart else "No flow elements detected to generate flowchart." }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Dependencies Panel -->
+    <div class="viz-panel" id="viz-dependencies">
+        {% if visualizations.dependency_graph and not visualizations.dependency_graph.error %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-network-wired"></i> Dependency Graph</h3>
+            <div id="dependency-chart" class="chart-container"></div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-network-wired"></i> Dependencies</h3>
+            <div class="empty-state">
+                <i class="fas fa-info-circle"></i>
+                <p>No imports/dependencies detected.</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if result.get('imports') %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-list"></i> Import List</h3>
+            <div class="import-list">
+                {% for imp in result.get('imports', []) %}
+                <span class="import-tag"><i class="fas fa-box"></i> {{ imp }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Explanations Panel -->
+    <div class="viz-panel" id="viz-explanations">
+        {% if result.get('function_explanations') %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-brain"></i> Function Explanations</h3>
+            <div class="explanation-list">
+                {% for exp in result.get('function_explanations', []) %}
+                <div class="explanation-item">
+                    <div class="explanation-header">
+                        <span class="explanation-name">{{ exp.name }}()</span>
+                        <span class="complexity-badge complexity-{{ 'high' if exp.complexity > 10 else 'medium' if exp.complexity > 5 else 'low' }}">
+                            Complexity: {{ exp.complexity }}
+                        </span>
+                    </div>
+                    <div class="explanation-levels">
+                        <div class="explanation-level">
+                            <span class="level-tag level-beginner">Beginner</span>
+                            <p>{{ exp.beginner }}</p>
+                        </div>
+                        <div class="explanation-level">
+                            <span class="level-tag level-intermediate">Intermediate</span>
+                            <p>{{ exp.intermediate }}</p>
+                        </div>
+                        <div class="explanation-level">
+                            <span class="level-tag level-advanced">Advanced</span>
+                            <p>{{ exp.advanced }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-brain"></i> Explanations</h3>
+            <div class="empty-state"><p>No detailed explanations available for this analysis.</p></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Line by Line Panel -->
+    <div class="viz-panel" id="viz-linebyline">
+        {% if result.get('line_explanations') %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-list-ol"></i> Line-by-Line Breakdown</h3>
+            <div class="line-explanation-list">
+                {% for line in result.get('line_explanations', []) %}
+                <div class="line-explanation-item">
+                    <div class="line-number">{{ line.line }}</div>
+                    <div class="line-content">
+                        <code class="line-code">{{ line.code }}</code>
+                        <div class="line-meta">
+                            <span class="line-purpose"><i class="fas fa-bullseye"></i> {{ line.purpose }}</span>
+                            <span class="line-explanation"><i class="fas fa-comment"></i> {{ line.explanation }}</span>
+                            {% if line.variables %}
+                            <span class="line-variables">
+                                <i class="fas fa-tag"></i> Variables: {{ line.variables|join(', ') }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="viz-card glass">
+            <h3><i class="fas fa-list-ol"></i> Line by Line</h3>
+            <div class="empty-state"><p>No line-by-line breakdown available for this analysis.</p></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Report Actions -->
+    <div class="report-actions glass">
+        <h4><i class="fas fa-download"></i> Download Report</h4>
+        <div class="report-buttons">
+            <a href="{{ url_for('generate_report_route', analysis_id=analysis.id, report_type='html') }}" class="btn btn-primary">
+                <i class="fas fa-file-code"></i> HTML
+            </a>
+            <a href="{{ url_for('generate_report_route', analysis_id=analysis.id, report_type='json') }}" class="btn btn-primary">
+                <i class="fas fa-file-code"></i> JSON
+            </a>
+            <a href="{{ url_for('generate_report_route', analysis_id=analysis.id, report_type='txt') }}" class="btn btn-primary">
+                <i class="fas fa-file-alt"></i> TXT
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+// Mermaid removed - flowchart now uses Plotly for 100% reliability
+
+// Tab switching
+const vizTabs = document.querySelectorAll('.viz-tab');
+const vizPanels = document.querySelectorAll('.viz-panel');
+
+vizTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        vizTabs.forEach(t => t.classList.remove('active'));
+        vizPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('viz-' + tab.dataset.viz).classList.add('active');
+
+        // Resize Plotly charts when tab becomes visible
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 100);
+    });
+});
+
+// Plotly charts
+const vizData = {{ visualizations|tojson }};
+
+function renderChart(elementId, chartData) {
+    if (chartData && !chartData.error && document.getElementById(elementId)) {
+        Plotly.newPlot(elementId, chartData.data, chartData.layout || {}, {responsive: true});
+    }
+}
+
+// Render all available charts with current theme
+const currentTheme = document.documentElement.dataset.theme || 'dark';
+const chartTextColor = currentTheme === 'dark' ? '#f1f5f9' : '#0f172a';
+const chartMutedColor = currentTheme === 'dark' ? '#94a3b8' : '#64748b';
+const chartGridColor = currentTheme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+
+function applyThemeToLayout(layout) {
+    if (!layout) return layout;
+    layout.paper_bgcolor = 'rgba(0,0,0,0)';
+    layout.plot_bgcolor = 'rgba(0,0,0,0)';
+    layout.font = { color: chartTextColor, family: 'Inter, sans-serif' };
+    if (layout.title) {
+        if (typeof layout.title === 'string') {
+            layout.title = { text: layout.title, font: { color: chartTextColor, size: 16 } };
+        } else if (layout.title.font) {
+            layout.title.font.color = chartTextColor;
+        }
+    }
+    ['xaxis', 'yaxis'].forEach(axis => {
+        if (layout[axis]) {
+            if (layout[axis].title) {
+                if (typeof layout[axis].title === 'string') {
+                    layout[axis].title = { text: layout[axis].title, font: { color: chartMutedColor } };
+                } else if (layout[axis].title.font) {
+                    layout[axis].title.font.color = chartMutedColor;
+                }
+            }
+            layout[axis].tickfont = { color: chartMutedColor };
+            layout[axis].gridcolor = chartGridColor;
+        }
+    });
+    if (layout.legend) {
+        layout.legend.font = { color: chartTextColor };
+    }
+    return layout;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Apply theme to all chart layouts before rendering
+    ['metrics_chart', 'complexity_chart', 'ast_tree', 'call_graph', 
+     'function_hierarchy', 'class_hierarchy', 'dependency_graph', 'flowchart'].forEach(key => {
+        if (vizData[key] && vizData[key].layout) {
+            vizData[key].layout = applyThemeToLayout(vizData[key].layout);
+        }
+    });
+
+    renderChart('metrics-chart', vizData.metrics_chart);
+    renderChart('complexity-chart', vizData.complexity_chart);
+    renderChart('ast-chart', vizData.ast_tree);
+    renderChart('call-graph-chart', vizData.call_graph);
+    renderChart('function-hierarchy-chart', vizData.function_hierarchy);
+    renderChart('class-hierarchy-chart', vizData.class_hierarchy);
+    renderChart('dependency-chart', vizData.dependency_graph);
+    renderChart('flowchart-chart', vizData.flowchart);
+});
+</script>
+{% endblock %}

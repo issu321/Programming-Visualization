@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Features - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Features</span>
+        <h1 class="page-title">Powerful Analysis Tools</h1>
+        <p class="page-subtitle">Discover everything our platform can do for your code</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="features-detail">
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-sitemap"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Abstract Syntax Tree Visualization</h3>
+                <p>Generate interactive AST trees using real Python AST parsing. Zoom in, collapse branches, and explore the structure of your code visually.</p>
+                <ul>
+                    <li>Real AST generation using Python's ast module</li>
+                    <li>Interactive Plotly visualization</li>
+                    <li>Color-coded node types by depth</li>
+                    <li>Hover tooltips with node details</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Function Call Graphs</h3>
+                <p>Visualize how functions call each other with dynamic NetworkX graphs. Identify dependencies and code hotspots at a glance.</p>
+                <ul>
+                    <li>Directed graph of function calls</li>
+                    <li>Node size based on cyclomatic complexity</li>
+                    <li>Color-coded by complexity level</li>
+                    <li>Interactive zoom and pan</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Automatic Flowchart Generation</h3>
+                <p>Convert your code into Mermaid flowcharts showing execution flow, loops, conditions, and function relationships.</p>
+                <ul>
+                    <li>Loop flowcharts</li>
+                    <li>Condition flowcharts</li>
+                    <li>Function flowcharts</li>
+                    <li>Program-level flowcharts</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Multi-Level Explanations</h3>
+                <p>Get explanations tailored to your skill level - from beginner-friendly to advanced technical details.</p>
+                <ul>
+                    <li>Beginner: Simple, analogy-based explanations</li>
+                    <li>Intermediate: Technical but accessible</li>
+                    <li>Advanced: Detailed complexity and architecture</li>
+                    <li>Per-function explanations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-list-ol"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Line-by-Line Analysis</h3>
+                <p>Understand every single line of your code with detailed breakdowns of purpose, variables, and effects.</p>
+                <ul>
+                    <li>Line number and code display</li>
+                    <li>Purpose description</li>
+                    <li>Variable usage tracking</li>
+                    <li>Output effect analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Complexity Analysis</h3>
+                <p>Estimate time and space complexity with detailed explanations of why your code has a certain complexity class.</p>
+                <ul>
+                    <li>Time complexity estimation</li>
+                    <li>Space complexity estimation</li>
+                    <li>Cyclomatic complexity per function</li>
+                    <li>Detailed complexity explanations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-file-export"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Report Generation</h3>
+                <p>Export comprehensive reports in multiple formats for documentation, sharing, or archiving.</p>
+                <ul>
+                    <li>PDF reports with visualizations</li>
+                    <li>HTML reports for web viewing</li>
+                    <li>JSON for programmatic access</li>
+                    <li>TXT for quick reference</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-detail-card glass">
+            <div class="feature-detail-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="feature-detail-content">
+                <h3>Multi-Language Support</h3>
+                <p>Real parsing and analysis for Python, Java, C, and C++ using industry-standard parsers.</p>
+                <ul>
+                    <li>Python: ast module</li>
+                    <li>Java: javalang parser</li>
+                    <li>C: pycparser</li>
+                    <li>C++: Advanced regex + heuristic analysis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

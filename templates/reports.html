@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Reports - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Reports</span>
+        <h1 class="page-title">Generated Reports</h1>
+        <p class="page-subtitle">Download and manage your analysis reports</p>
+    </div>
+</section>
+
+<section class="section">
+    <!-- Generate New Report -->
+    <div class="viz-card glass">
+        <h3><i class="fas fa-plus-circle"></i> Generate New Report</h3>
+        {% if history %}
+        <div class="report-generator">
+            <p>Select an analysis to generate a report:</p>
+            <div class="report-analysis-list">
+                {% for item in history[:5] %}
+                <div class="report-analysis-item">
+                    <div class="report-analysis-info">
+                        <span class="report-analysis-name">{{ item.filename }}</span>
+                        <span class="lang-badge lang-{{ item.language }}">{{ item.language|upper }}</span>
+                        <span class="report-analysis-date">{{ item.created_at }}</span>
+                    </div>
+                    <div class="report-analysis-actions">
+                        <a href="{{ url_for('generate_report_route', analysis_id=item.id, report_type='html') }}" class="btn btn-xs btn-primary">
+                            <i class="fas fa-file-code"></i> HTML
+                        </a>
+                        <a href="{{ url_for('generate_report_route', analysis_id=item.id, report_type='json') }}" class="btn btn-xs btn-primary">
+                            <i class="fas fa-file-code"></i> JSON
+                        </a>
+                        <a href="{{ url_for('generate_report_route', analysis_id=item.id, report_type='txt') }}" class="btn btn-xs btn-primary">
+                            <i class="fas fa-file-alt"></i> TXT
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-microscope"></i>
+            <p>No analyses yet. <a href="{{ url_for('analyzer') }}">Analyze code first</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Existing Reports -->
+    <div class="viz-card glass">
+        <h3><i class="fas fa-folder"></i> Saved Reports</h3>
+        {% if reports %}
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Analysis ID</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td><span class="report-type-badge report-{{ report.report_type }}">{{ report.report_type|upper }}</span></td>
+                        <td>#{{ report.analysis_id }}</td>
+                        <td>{{ report.created_at }}</td>
+                        <td>
+                            <a href="{{ url_for('generate_report_route', analysis_id=report.analysis_id, report_type=report.report_type) }}" class="btn btn-xs btn-primary">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-file-alt"></i>
+            <p>No reports generated yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

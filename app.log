@@ -1,0 +1,159 @@
+2026-06-05 09:39:27,162 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-05 09:39:27,172 [INFO] [APP] Database module loaded
+2026-06-05 09:39:27,174 [INFO] [APP] Auth module loaded
+2026-06-05 09:39:27,200 [INFO] [APP] Analyzers module loaded
+2026-06-05 09:39:29,816 [INFO] [APP] Visualizer module loaded
+2026-06-05 09:39:29,885 [INFO] [APP] Database initialized.
+2026-06-05 09:39:29,885 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-05 09:39:29,915 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.163.122.221:5000
+2026-06-05 09:39:29,917 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-05 09:39:47,169 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:47] "GET / HTTP/1.1" 200 -
+2026-06-05 09:39:47,245 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:39:47,247 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:39:47,725 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:47] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:39:49,762 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:49] "GET /register HTTP/1.1" 200 -
+2026-06-05 09:39:49,811 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:49] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:39:49,812 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:39:50,012 [INFO] 10.163.122.221 - - [05/Jun/2026 09:39:50] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:40:24,181 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:24] "[32mPOST /register HTTP/1.1[0m" 302 -
+2026-06-05 09:40:24,196 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:24] "GET /login HTTP/1.1" 200 -
+2026-06-05 09:40:24,222 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:24] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:40:24,229 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:24] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:40:24,579 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:24] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:40:33,116 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:33] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-06-05 09:40:33,148 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:33] "GET /dashboard HTTP/1.1" 200 -
+2026-06-05 09:40:33,203 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:40:33,209 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:40:33,388 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:33] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:40:36,096 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:36] "GET /analyzer HTTP/1.1" 200 -
+2026-06-05 09:40:36,148 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:40:36,153 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:40:36,424 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:36] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:40:57,056 [INFO] [ANALYZE] Request received
+2026-06-05 09:40:57,058 [INFO] [ANALYZE] User: ussu
+2026-06-05 09:40:57,060 [INFO] [ANALYZE] File field present, filename: 'factorial.py'
+2026-06-05 09:40:57,061 [INFO] [ANALYZE] Saving to: /home/ussuroyal/Documents/PROGRAMMING/Python/Programming-Visualization/uploads/cdf77ef4-04ca-4a07-83c4-99888977337d_factorial.py
+2026-06-05 09:40:57,061 [INFO] [ANALYZE] File saved, size: 327 bytes
+2026-06-05 09:40:57,072 [INFO] [ANALYZE] File processed: factorial.py, lang: python
+2026-06-05 09:40:57,073 [INFO] [ANALYZE] Starting analysis: 327 chars
+2026-06-05 09:40:57,075 [INFO] [ANALYZE] Analysis complete: python, 2 funcs
+2026-06-05 09:40:57,076 [INFO] [ANALYZE] Generating visualizations...
+2026-06-05 09:40:58,523 [INFO] [ANALYZE] Visualizations: ['ast_tree', 'call_graph', 'function_hierarchy', 'complexity_chart', 'metrics_chart', 'flowchart', 'dependency_graph']
+2026-06-05 09:40:58,523 [INFO] [ANALYZE] Saving to database...
+2026-06-05 09:40:58,538 [INFO] [ANALYZE] Saved to DB: ID 1
+2026-06-05 09:40:58,540 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:58] "[32mPOST /analyze HTTP/1.1[0m" 302 -
+2026-06-05 09:40:58,698 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:58] "GET /visualization/1 HTTP/1.1" 200 -
+2026-06-05 09:40:58,760 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:40:58,777 [INFO] 10.163.122.221 - - [05/Jun/2026 09:40:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:41:00,640 [INFO] 10.163.122.221 - - [05/Jun/2026 09:41:00] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:43:37,368 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:37] "GET / HTTP/1.1" 200 -
+2026-06-05 09:43:37,468 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:43:37,482 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:43:37,984 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:37] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:43:40,958 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:40] "GET /analyzer HTTP/1.1" 200 -
+2026-06-05 09:43:40,999 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:43:41,003 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:43:41,245 [INFO] 10.163.122.221 - - [05/Jun/2026 09:43:41] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:44:02,531 [INFO] [ANALYZE] Request received
+2026-06-05 09:44:02,532 [INFO] [ANALYZE] User: ussu
+2026-06-05 09:44:02,535 [INFO] [ANALYZE] File field present, filename: 'student_grades.c'
+2026-06-05 09:44:02,535 [INFO] [ANALYZE] Saving to: /home/ussuroyal/Documents/PROGRAMMING/Python/Programming-Visualization/uploads/47f4f2a0-56de-4ba3-a001-9991f85f2b52_student_grades.c
+2026-06-05 09:44:02,536 [INFO] [ANALYZE] File saved, size: 1231 bytes
+2026-06-05 09:44:02,556 [INFO] [ANALYZE] File processed: student_grades.c, lang: c
+2026-06-05 09:44:02,557 [INFO] [ANALYZE] Starting analysis: 1231 chars
+2026-06-05 09:44:02,597 [INFO] [ANALYZE] Analysis complete: c, 4 funcs
+2026-06-05 09:44:02,598 [INFO] [ANALYZE] Generating visualizations...
+2026-06-05 09:44:02,736 [INFO] [ANALYZE] Visualizations: ['call_graph', 'function_hierarchy', 'complexity_chart', 'metrics_chart', 'flowchart', 'dependency_graph']
+2026-06-05 09:44:02,736 [INFO] [ANALYZE] Saving to database...
+2026-06-05 09:44:02,749 [INFO] [ANALYZE] Saved to DB: ID 2
+2026-06-05 09:44:02,750 [INFO] 10.163.122.221 - - [05/Jun/2026 09:44:02] "[32mPOST /analyze HTTP/1.1[0m" 302 -
+2026-06-05 09:44:02,771 [INFO] 10.163.122.221 - - [05/Jun/2026 09:44:02] "GET /visualization/2 HTTP/1.1" 200 -
+2026-06-05 09:44:02,814 [INFO] 10.163.122.221 - - [05/Jun/2026 09:44:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:44:02,823 [INFO] 10.163.122.221 - - [05/Jun/2026 09:44:02] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:44:04,044 [INFO] 10.163.122.221 - - [05/Jun/2026 09:44:04] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:51:39,833 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-05 09:51:39,836 [INFO] [APP] Database module loaded
+2026-06-05 09:51:39,837 [INFO] [APP] Auth module loaded
+2026-06-05 09:51:39,856 [INFO] [APP] Analyzers module loaded
+2026-06-05 09:51:41,014 [INFO] [APP] Visualizer module loaded
+2026-06-05 09:51:41,027 [INFO] [APP] Database initialized.
+2026-06-05 09:51:41,027 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-05 09:51:41,041 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.163.122.221:5000
+2026-06-05 09:51:41,041 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-05 09:52:00,376 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:00] "GET / HTTP/1.1" 200 -
+2026-06-05 09:52:00,483 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:52:00,488 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:52:00,967 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:00] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:52:03,713 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:03] "GET /analyzer HTTP/1.1" 200 -
+2026-06-05 09:52:03,736 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:52:03,747 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:52:04,023 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:04] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:52:13,815 [INFO] [ANALYZE] Request received
+2026-06-05 09:52:13,818 [INFO] [ANALYZE] User: ussu
+2026-06-05 09:52:13,821 [INFO] [ANALYZE] File field present, filename: 'student_grades.c'
+2026-06-05 09:52:13,821 [INFO] [ANALYZE] Saving to: /home/ussuroyal/Documents/PROGRAMMING/Python/Programming-Visualization/uploads/7fca4b09-68f9-48fa-9b90-2cf49aa973f3_student_grades.c
+2026-06-05 09:52:13,822 [INFO] [ANALYZE] File saved, size: 1231 bytes
+2026-06-05 09:52:13,835 [INFO] [ANALYZE] File processed: student_grades.c, lang: c
+2026-06-05 09:52:13,836 [INFO] [ANALYZE] Starting analysis: 1231 chars
+2026-06-05 09:52:13,910 [INFO] [ANALYZE] Analysis complete: c, 4 funcs
+2026-06-05 09:52:13,912 [INFO] [ANALYZE] Generating visualizations...
+2026-06-05 09:52:15,069 [INFO] [ANALYZE] Visualizations: ['call_graph', 'function_hierarchy', 'complexity_chart', 'metrics_chart', 'flowchart', 'dependency_graph']
+2026-06-05 09:52:15,069 [INFO] [ANALYZE] Saving to database...
+2026-06-05 09:52:15,091 [INFO] [ANALYZE] Saved to DB: ID 3
+2026-06-05 09:52:15,093 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:15] "[32mPOST /analyze HTTP/1.1[0m" 302 -
+2026-06-05 09:52:15,219 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:15] "GET /visualization/3 HTTP/1.1" 200 -
+2026-06-05 09:52:15,278 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:52:15,285 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:52:15,902 [INFO] 10.163.122.221 - - [05/Jun/2026 09:52:15] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:53:22,938 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:22] "GET / HTTP/1.1" 200 -
+2026-06-05 09:53:23,006 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:23] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:53:23,009 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:23] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:53:23,498 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:23] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:53:25,151 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:25] "GET /analyzer HTTP/1.1" 200 -
+2026-06-05 09:53:25,223 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:25] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:53:25,225 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:25] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:53:25,445 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:25] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:53:35,296 [INFO] [ANALYZE] Request received
+2026-06-05 09:53:35,297 [INFO] [ANALYZE] User: ussu
+2026-06-05 09:53:35,299 [INFO] [ANALYZE] File field present, filename: 'student_grades.cpp'
+2026-06-05 09:53:35,299 [INFO] [ANALYZE] Saving to: /home/ussuroyal/Documents/PROGRAMMING/Python/Programming-Visualization/uploads/582b6757-567b-4c6e-acb2-d58a27a64d7c_student_grades.cpp
+2026-06-05 09:53:35,300 [INFO] [ANALYZE] File saved, size: 2635 bytes
+2026-06-05 09:53:35,313 [INFO] [ANALYZE] File processed: student_grades.cpp, lang: cpp
+2026-06-05 09:53:35,313 [INFO] [ANALYZE] Starting analysis: 2635 chars
+2026-06-05 09:53:35,327 [INFO] [ANALYZE] Analysis complete: cpp, 9 funcs
+2026-06-05 09:53:35,333 [INFO] [ANALYZE] Generating visualizations...
+2026-06-05 09:53:35,610 [INFO] [ANALYZE] Visualizations: ['call_graph', 'function_hierarchy', 'complexity_chart', 'metrics_chart', 'flowchart', 'dependency_graph', 'class_hierarchy']
+2026-06-05 09:53:35,611 [INFO] [ANALYZE] Saving to database...
+2026-06-05 09:53:35,625 [INFO] [ANALYZE] Saved to DB: ID 4
+2026-06-05 09:53:35,627 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:35] "[32mPOST /analyze HTTP/1.1[0m" 302 -
+2026-06-05 09:53:35,651 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:35] "GET /visualization/4 HTTP/1.1" 200 -
+2026-06-05 09:53:35,701 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:53:35,713 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:53:36,670 [INFO] 10.163.122.221 - - [05/Jun/2026 09:53:36] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 09:54:32,324 [INFO] 10.163.122.221 - - [05/Jun/2026 09:54:32] "GET /visualization/4 HTTP/1.1" 200 -
+2026-06-05 09:54:32,399 [INFO] 10.163.122.221 - - [05/Jun/2026 09:54:32] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-05 09:54:32,415 [INFO] 10.163.122.221 - - [05/Jun/2026 09:54:32] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-05 09:54:33,326 [INFO] 10.163.122.221 - - [05/Jun/2026 09:54:33] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-05 18:06:30,181 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-05 18:06:30,187 [INFO] [APP] Database module loaded
+2026-06-05 18:06:30,203 [INFO] [APP] Analyzers module loaded
+2026-06-05 18:06:30,668 [INFO] [APP] Visualizer module loaded
+2026-06-05 18:06:30,678 [ERROR] [APP] Database init failed: file is not a database
+2026-06-05 18:06:30,678 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-05 18:06:30,884 [INFO] [APP] Auto-opened browser: http://127.0.0.1:5000
+2026-06-05 18:06:30,973 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.163.122.221:5000
+2026-06-05 18:06:30,973 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-05 18:06:32,075 [ERROR] [HOME] Stats error: file is not a database
+2026-06-05 18:06:32,126 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:32] "GET / HTTP/1.1" 200 -
+2026-06-05 18:06:32,189 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:32] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-06-05 18:06:32,197 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:32] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-06-05 18:06:36,437 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:36] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -

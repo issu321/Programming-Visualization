@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% block title %}Programming Visualization - AI-Powered Code Analysis{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-sparkles"></i>
+            <span>AI-Powered Code Analysis</span>
+        </div>
+        <h1 class="hero-title">
+            <span class="typing-text" data-text="Visualize Your Code"></span>
+            <span class="cursor">|</span>
+        </h1>
+        <p class="hero-subtitle">
+            Upload or paste your code to generate interactive visualizations, 
+            AST trees, flowcharts, and beginner-friendly explanations in seconds.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('analyzer') }}" class="btn btn-lg btn-primary btn-glow">
+                <i class="fas fa-rocket"></i> Start Analyzing
+            </a>
+            <a href="{{ url_for('features') }}" class="btn btn-lg btn-outline">
+                <i class="fas fa-play"></i> See Features
+            </a>
+        </div>
+
+        <!-- Stats Counter -->
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-target="{{ stats.total_analyses }}">0</span>
+                <span class="stat-label">Analyses</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="{{ stats.total_users }}">0</span>
+                <span class="stat-label">Users</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="4">0</span>
+                <span class="stat-label">Languages</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="12">0</span>
+                <span class="stat-label">Visualizations</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Code Preview -->
+    <div class="hero-preview">
+        <div class="code-window">
+            <div class="code-header">
+                <div class="code-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="code-title">example.py</span>
+            </div>
+            <pre class="code-body"><code><span class="token-keyword">def</span> <span class="token-function">calculate_sum</span>(<span class="token-param">numbers</span>):
+    <span class="token-comment"># Add all numbers together</span>
+    <span class="token-keyword">total</span> = <span class="token-number">0</span>
+    <span class="token-keyword">for</span> <span class="token-param">num</span> <span class="token-keyword">in</span> <span class="token-param">numbers</span>:
+        <span class="token-keyword">total</span> += <span class="token-param">num</span>
+    <span class="token-keyword">return</span> <span class="token-keyword">total</span></code></pre>
+        </div>
+        <div class="floating-card card-1">
+            <i class="fas fa-project-diagram"></i>
+            <span>AST Generated</span>
+        </div>
+        <div class="floating-card card-2">
+            <i class="fas fa-chart-pie"></i>
+            <span>Complexity: O(n)</span>
+        </div>
+        <div class="floating-card card-3">
+            <i class="fas fa-sitemap"></i>
+            <span>3 Functions</span>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid -->
+<section class="section">
+    <div class="section-header">
+        <span class="section-tag">Features</span>
+        <h2 class="section-title">Everything You Need</h2>
+        <p class="section-subtitle">Powerful tools to understand, visualize, and explain your code</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-sitemap"></i>
+            </div>
+            <h3>AST Visualization</h3>
+            <p>Interactive Abstract Syntax Tree with zoom, collapse, and expand capabilities.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3>Call Graphs</h3>
+            <p>Dynamic function call relationships with interactive NetworkX graphs.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <h3>Flowcharts</h3>
+            <p>Auto-generated Mermaid flowcharts for loops, conditions, and functions.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>AI Explanations</h3>
+            <p>Beginner, intermediate, and advanced explanations for every function.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-list-ol"></i>
+            </div>
+            <h3>Line-by-Line</h3>
+            <p>Detailed breakdown of every line with purpose and variable usage.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3>Complexity Analysis</h3>
+            <p>Time and space complexity estimation with detailed explanations.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-file-export"></i>
+            </div>
+            <h3>Export Reports</h3>
+            <p>Download PDF, HTML, JSON, and TXT reports with full analysis.</p>
+        </div>
+
+        <div class="feature-card glass">
+            <div class="feature-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <h3>Multi-Language</h3>
+            <p>Support for Python, Java, C, and C++ with real parsers.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="section section-alt">
+    <div class="section-header">
+        <span class="section-tag">Technology</span>
+        <h2 class="section-title">Built With Modern Tech</h2>
+    </div>
+
+    <div class="tech-grid">
+        <div class="tech-item">
+            <i class="fab fa-python"></i>
+            <span>Python 3.11+</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-flask"></i>
+            <span>Flask</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-database"></i>
+            <span>SQLite</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Plotly</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-project-diagram"></i>
+            <span>NetworkX</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-code-branch"></i>
+            <span>Graphviz</span>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-diagram-project"></i>
+            <span>Mermaid</span>
+        </div>
+        <div class="tech-item">
+            <i class="fab fa-js"></i>
+            <span>D3.js</span>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section">
+    <div class="cta-card glass">
+        <div class="cta-content">
+            <h2>Ready to Visualize Your Code?</h2>
+            <p>Join thousands of developers who use Programming Visualization to understand their code better.</p>
+            <div class="cta-actions">
+                <a href="{{ url_for('analyzer') }}" class="btn btn-lg btn-primary btn-glow">
+                    <i class="fas fa-rocket"></i> Launch Analyzer
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+// Typing animation
+const typingElement = document.querySelector('.typing-text');
+if (typingElement) {
+    const text = typingElement.dataset.text;
+    let i = 0;
+    function typeWriter() {
+        if (i < text.length) {
+            typingElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+    setTimeout(typeWriter, 500);
+}
+
+// Counter animation
+const counters = document.querySelectorAll('.stat-number');
+const animateCounter = (el) => {
+    const target = parseInt(el.dataset.target) || 0;
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+            el.textContent = target.toLocaleString();
+            clearInterval(timer);
+        } else {
+            el.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 16);
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            observer.unobserve(entry.target);
+        }
+    });
+});
+counters.forEach(c => observer.observe(c));
+</script>
+{% endblock %}

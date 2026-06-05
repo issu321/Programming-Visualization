@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% block title %}Code Analyzer - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Analyzer</span>
+        <h1 class="page-title">Analyze Your Code</h1>
+        <p class="page-subtitle">Paste code or upload a file to get started</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="analyzer-container">
+        <!-- Input Tabs -->
+        <div class="analyzer-tabs">
+            <button class="tab-btn active" data-tab="paste" type="button">
+                <i class="fas fa-paste"></i> Paste Code
+            </button>
+            <button class="tab-btn" data-tab="upload" type="button">
+                <i class="fas fa-cloud-upload-alt"></i> Upload File
+            </button>
+        </div>
+
+        <!-- Paste Code Panel -->
+        <div class="tab-panel active" id="panel-paste">
+            <form method="POST" action="{{ url_for('analyze') }}" class="analyzer-form" id="pasteForm">
+                <div class="form-group">
+                    <label for="filename"><i class="fas fa-file"></i> Filename (optional)</label>
+                    <input type="text" id="filename" name="filename" placeholder="e.g., my_script.py" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="code"><i class="fas fa-code"></i> Source Code</label>
+                    <div class="code-editor-wrapper">
+                        <textarea id="code" name="code" class="code-editor" 
+                                  placeholder="Paste your Python, Java, C, or C++ code here..."
+                                  rows="20" spellcheck="false"></textarea>
+                        <div class="code-editor-info">
+                            <span id="line-count">0 lines</span>
+                            <span id="char-count">0 chars</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-primary btn-glow btn-analyze" id="pasteAnalyzeBtn">
+                    <i class="fas fa-microscope"></i> <span>Analyze Code</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Upload File Panel -->
+        <div class="tab-panel" id="panel-upload">
+            <form method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data" class="analyzer-form" id="uploadForm">
+
+                <input type="file" id="fileInput" name="file" 
+                       accept=".py,.java,.c,.cpp,.cc,.cxx,.h,.hpp" style="display:none;">
+
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-zone-content" id="dropZoneContent">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag &amp; drop your file here</p>
+                        <span>or</span>
+                        <button type="button" class="btn btn-primary" id="browseBtn">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                        <p class="drop-zone-hint">Supported: .py, .java, .c, .cpp, .h, .hpp</p>
+                    </div>
+
+                    <div class="drop-zone-file" id="dropZoneFile" style="display:none;">
+                        <div class="file-selected-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <div class="file-selected-info">
+                            <span class="file-selected-name" id="fileName"></span>
+                            <span class="file-selected-size" id="fileSize"></span>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline" id="removeFileBtn">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-lg btn-primary btn-glow btn-analyze" id="uploadAnalyzeBtn" disabled>
+                    <i class="fas fa-microscope"></i> <span>Analyze File</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Supported Languages -->
+    <div class="supported-langs glass">
+        <h4><i class="fas fa-code"></i> Supported Languages</h4>
+        <div class="lang-chips">
+            <span class="lang-chip"><i class="fab fa-python"></i> Python</span>
+            <span class="lang-chip"><i class="fab fa-java"></i> Java</span>
+            <span class="lang-chip"><i class="fas fa-copyright"></i> C</span>
+            <span class="lang-chip"><i class="fas fa-plus"></i> C++</span>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+(function() {
+    "use strict";
+
+    // ===== TAB SWITCHING =====
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabBtns.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            const targetTab = this.dataset.tab;
+            tabBtns.forEach(function(b) { b.classList.remove("active"); });
+            tabPanels.forEach(function(p) { p.classList.remove("active"); });
+            this.classList.add("active");
+            const targetPanel = document.getElementById("panel-" + targetTab);
+            if (targetPanel) targetPanel.classList.add("active");
+        });
+    });
+
+    // ===== PASTE CODE STATS =====
+    const codeEditor = document.getElementById("code");
+    const lineCount = document.getElementById("line-count");
+    const charCount = document.getElementById("char-count");
+
+    if (codeEditor && lineCount && charCount) {
+        function updateStats() {
+            var text = codeEditor.value;
+            var lines = text.length === 0 ? 0 : text.split("\n").length;
+            lineCount.textContent = lines + " lines";
+            charCount.textContent = text.length + " chars";
+        }
+        codeEditor.addEventListener("input", updateStats);
+        updateStats();
+    }
+
+    // ===== FILE UPLOAD =====
+    var fileInput = document.getElementById("fileInput");
+    var browseBtn = document.getElementById("browseBtn");
+    var dropZone = document.getElementById("dropZone");
+    var dropZoneContent = document.getElementById("dropZoneContent");
+    var dropZoneFile = document.getElementById("dropZoneFile");
+    var fileNameEl = document.getElementById("fileName");
+    var fileSizeEl = document.getElementById("fileSize");
+    var removeFileBtn = document.getElementById("removeFileBtn");
+    var uploadAnalyzeBtn = document.getElementById("uploadAnalyzeBtn");
+    var uploadForm = document.getElementById("uploadForm");
+
+    function formatSize(bytes) {
+        if (bytes === 0) return "0 B";
+        var k = 1024;
+        var sizes = ["B", "KB", "MB"];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+    }
+
+    function showSelectedFile(file) {
+        if (!file) return;
+        fileNameEl.textContent = file.name;
+        fileSizeEl.textContent = formatSize(file.size);
+        dropZoneContent.style.display = "none";
+        dropZoneFile.style.display = "flex";
+        uploadAnalyzeBtn.disabled = false;
+        dropZone.classList.add("has-file");
+    }
+
+    function clearSelectedFile() {
+        fileInput.value = "";
+        fileNameEl.textContent = "";
+        fileSizeEl.textContent = "";
+        dropZoneContent.style.display = "flex";
+        dropZoneFile.style.display = "none";
+        uploadAnalyzeBtn.disabled = true;
+        dropZone.classList.remove("has-file");
+    }
+
+    // Browse button click
+    if (browseBtn && fileInput) {
+        browseBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.click();
+        });
+    }
+
+    // File input change
+    if (fileInput) {
+        fileInput.addEventListener("change", function() {
+            if (this.files && this.files.length > 0) {
+                showSelectedFile(this.files[0]);
+            }
+        });
+    }
+
+    // Remove file
+    if (removeFileBtn) {
+        removeFileBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            clearSelectedFile();
+        });
+    }
+
+    // Drag & Drop
+    if (dropZone) {
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(function(eventName) {
+            dropZone.addEventListener(eventName, function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false);
+        });
+
+        ["dragenter", "dragover"].forEach(function(eventName) {
+            dropZone.addEventListener(eventName, function() {
+                dropZone.classList.add("drag-over");
+            }, false);
+        });
+
+        ["dragleave", "drop"].forEach(function(eventName) {
+            dropZone.addEventListener(eventName, function() {
+                dropZone.classList.remove("drag-over");
+            }, false);
+        });
+
+        dropZone.addEventListener("drop", function(e) {
+            var files = e.dataTransfer.files;
+            if (files && files.length > 0 && fileInput) {
+                fileInput.files = files;
+                showSelectedFile(files[0]);
+            }
+        }, false);
+
+        // Click anywhere on dropzone to browse (except buttons)
+        dropZone.addEventListener("click", function(e) {
+            if (e.target === dropZone || e.target === dropZoneContent || 
+                dropZoneContent.contains(e.target)) {
+                if (!dropZone.classList.contains("has-file") && fileInput) {
+                    fileInput.click();
+                }
+            }
+        });
+    }
+
+    // ===== FORM SUBMIT LOADING STATE =====
+    function addLoadingState(btn) {
+        if (!btn) return;
+        btn.disabled = true;
+        var originalHTML = btn.innerHTML;
+        btn.dataset.originalHtml = originalHTML;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> <span>Analyzing...</span>';
+    }
+
+    if (uploadForm) {
+        uploadForm.addEventListener("submit", function() {
+            addLoadingState(uploadAnalyzeBtn);
+        });
+    }
+
+    var pasteForm = document.getElementById("pasteForm");
+    var pasteAnalyzeBtn = document.getElementById("pasteAnalyzeBtn");
+    if (pasteForm) {
+        pasteForm.addEventListener("submit", function() {
+            var code = codeEditor ? codeEditor.value.trim() : "";
+            if (!code) {
+                alert("Please paste some code first.");
+                return false;
+            }
+            addLoadingState(pasteAnalyzeBtn);
+        });
+    }
+
+})();
+</script>
+{% endblock %}

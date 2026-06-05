@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}Database - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Database</span>
+        <h1 class="page-title">Platform Statistics</h1>
+        <p class="page-subtitle">Overview of platform usage and data</p>
+    </div>
+</section>
+
+<section class="section">
+    <!-- Global Stats -->
+    <div class="dashboard-stats">
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ stats.total_users }}</span>
+                <span class="stat-card-label">Total Users</span>
+            </div>
+        </div>
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ stats.total_analyses }}</span>
+                <span class="stat-card-label">Total Analyses</span>
+            </div>
+        </div>
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ stats.total_files }}</span>
+                <span class="stat-card-label">Files Uploaded</span>
+            </div>
+        </div>
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ stats.language_stats|length }}</span>
+                <span class="stat-card-label">Languages Detected</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Stats -->
+    {% if stats.language_stats %}
+    <div class="viz-card glass">
+        <h3><i class="fas fa-chart-bar"></i> Language Distribution (Platform-wide)</h3>
+        <div class="lang-distribution">
+            {% set total_lang = stats.language_stats.values()|sum %}
+            {% for lang, count in stats.language_stats.items() %}
+            <div class="lang-dist-item">
+                <div class="lang-dist-header">
+                    <span class="lang-dist-name">{{ lang|upper }}</span>
+                    <span class="lang-dist-count">{{ count }} ({{ (count / total_lang * 100)|round }}%)</span>
+                </div>
+                <div class="lang-dist-bar">
+                    <div class="lang-dist-fill" style="width: {{ (count / total_lang * 100)|round }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Your History -->
+    <div class="viz-card glass">
+        <h3><i class="fas fa-history"></i> Your Analysis History</h3>
+        {% if history %}
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Filename</th>
+                        <th>Language</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in history %}
+                    <tr>
+                        <td>#{{ item.id }}</td>
+                        <td>{{ item.filename }}</td>
+                        <td><span class="lang-badge lang-{{ item.language }}">{{ item.language|upper }}</span></td>
+                        <td>{{ item.created_at }}</td>
+                        <td>
+                            <a href="{{ url_for('visualization', analysis_id=item.id) }}" class="btn btn-xs btn-primary">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-history"></i>
+            <p>No history yet.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Your Files -->
+    <div class="viz-card glass">
+        <h3><i class="fas fa-folder-open"></i> Your Uploaded Files</h3>
+        {% if files %}
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Language</th>
+                        <th>Size</th>
+                        <th>Uploaded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        <td>{{ file.filename }}</td>
+                        <td><span class="lang-badge lang-{{ file.language }}">{{ file.language|upper }}</span></td>
+                        <td>{{ (file.file_size / 1024)|round(1) }} KB</td>
+                        <td>{{ file.uploaded_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <p>No files uploaded.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

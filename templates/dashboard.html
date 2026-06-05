@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Programming Visualization{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <div class="page-header-content">
+        <span class="page-tag">Dashboard</span>
+        <h1 class="page-title">Welcome, {{ current_user.username }}!</h1>
+        <p class="page-subtitle">Manage your analyses, files, and reports</p>
+    </div>
+</section>
+
+<section class="section">
+    <!-- Stats Cards -->
+    <div class="dashboard-stats">
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                <i class="fas fa-microscope"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ history|default([])|length }}</span>
+                <span class="stat-card-label">Total Analyses</span>
+            </div>
+        </div>
+
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+                <i class="fas fa-file-code"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ files|default([])|length }}</span>
+                <span class="stat-card-label">Uploaded Files</span>
+            </div>
+        </div>
+
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ reports|default([])|length }}</span>
+                <span class="stat-card-label">Reports</span>
+            </div>
+        </div>
+
+        <div class="stat-card glass">
+            <div class="stat-card-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="stat-card-info">
+                <span class="stat-card-value">{{ lang_counts|default({})|length }}</span>
+                <span class="stat-card-label">Languages Used</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Distribution -->
+    {% if lang_counts %}
+    <div class="dashboard-section glass">
+        <h3><i class="fas fa-chart-pie"></i> Language Distribution</h3>
+        <div class="lang-bars">
+            {% set total = lang_counts.values()|sum %}
+            {% for lang, count in lang_counts.items() %}
+            <div class="lang-bar-item">
+                <div class="lang-bar-label">
+                    <span class="lang-name">{{ lang|upper }}</span>
+                    <span class="lang-count">{{ count }} analysis{% if count > 1 %}es{% endif %}</span>
+                </div>
+                <div class="lang-bar-track">
+                    <div class="lang-bar-fill" style="width: {{ (count / total * 100)|round }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Analyses -->
+    <div class="dashboard-section glass">
+        <div class="section-header-row">
+            <h3><i class="fas fa-history"></i> Recent Analyses</h3>
+            <a href="{{ url_for('analyzer') }}" class="btn btn-sm btn-primary">
+                <i class="fas fa-plus"></i> New Analysis
+            </a>
+        </div>
+
+        {% if history %}
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Language</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in history[:10] %}
+                    <tr>
+                        <td><i class="fas fa-file-code"></i> {{ item.filename }}</td>
+                        <td><span class="lang-badge lang-{{ item.language }}">{{ item.language|upper }}</span></td>
+                        <td>{{ item.created_at }}</td>
+                        <td>
+                            <a href="{{ url_for('visualization', analysis_id=item.id) }}" class="btn btn-xs btn-primary">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-microscope"></i>
+            <p>No analyses yet. <a href="{{ url_for('analyzer') }}">Analyze your first code</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Recent Files -->
+    <div class="dashboard-section glass">
+        <div class="section-header-row">
+            <h3><i class="fas fa-folder-open"></i> Uploaded Files</h3>
+        </div>
+
+        {% if files %}
+        <div class="file-grid">
+            {% for file in files[:6] %}
+            <div class="file-card">
+                <div class="file-icon">
+                    <i class="fas fa-file-code"></i>
+                </div>
+                <div class="file-info">
+                    <span class="file-name">{{ file.filename }}</span>
+                    <span class="file-meta">{{ file.language|upper }} &middot; {{ (file.file_size / 1024)|round(1) }} KB</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <p>No files uploaded yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
