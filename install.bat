@@ -63,21 +63,11 @@ echo ==========================================
 echo   Installation Complete!
 echo ==========================================
 echo.
-echo To start the server:
-echo   venv\Scripts\activate.bat
-echo   python app.py
-echo.
-echo The application will be available at:
-echo   http://localhost:5000
-echo.
 echo Developed by issu321
 echo https://github.com/issu321/Programming-Visualization
 echo.
-
-set /p START_SERVER="Would you like to start the server now? (y/n): "
-if /i "%START_SERVER%"=="y" (
-    echo Starting server...
-    python app.py
-) else (
+echo "Launching...(Please Wait)"
+python app.py
+echo.
+echo.
     pause
-)
