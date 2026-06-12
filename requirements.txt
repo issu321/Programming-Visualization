@@ -1,7 +1,7 @@
-flask>=3.0.0
-werkzeug>=3.0.1
-plotly>=5.18.0
-networkx>=3.2.1
-javalang>=0.13.0
-pycparser>=2.21
+flask
+werkzeug
+plotly
+networkx
+javalang
+pycparser
 numpy
