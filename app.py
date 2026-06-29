@@ -69,6 +69,24 @@ ALLOWED_EXTENSIONS = {"py", "java", "c", "cpp", "cc", "cxx", "h", "hpp"}
 ANONYMOUS_USER_ID = 1
 
 
+# ==================== DUMMY CURRENT_USER FOR TEMPLATES ====================
+# Since this app has no login system, we inject a fake current_user object
+# so templates that reference {{ current_user.username }} won't crash.
+class AnonymousUser:
+    username = "Guest"
+    is_authenticated = False
+    is_active = True
+    is_anonymous = True
+    id = ANONYMOUS_USER_ID
+
+    def get_id(self):
+        return ANONYMOUS_USER_ID
+
+
+anonymous_user = AnonymousUser()
+# ==========================================================================
+
+
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -77,7 +95,8 @@ def allowed_file(filename):
 def inject_globals():
     return {
         "theme": session.get("theme", "dark"),
-        "year": datetime.now().year
+        "year": datetime.now().year,
+        "current_user": anonymous_user  # <-- FIX: inject dummy user
     }
 
 
@@ -179,7 +198,7 @@ def analyze():
                         flash(f"Upload failed: {str(upload_err)}", "danger")
                         return redirect(url_for("analyzer"))
                 else:
-                    flash("Invalid file type. Supported: .py, .java, .c, .cpp, .h, .hpp", "danger")
+                    flash("Invalid file type. Supported: .py, .java", "danger")
                     return redirect(url_for("analyzer"))
 
         # ===== HANDLE PASTED CODE =====

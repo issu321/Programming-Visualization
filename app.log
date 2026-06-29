@@ -157,3 +157,70 @@
 2026-06-05 18:06:32,189 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:32] "GET /static/css/style.css HTTP/1.1" 200 -
 2026-06-05 18:06:32,197 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:32] "GET /static/js/main.js HTTP/1.1" 200 -
 2026-06-05 18:06:36,437 [INFO] 127.0.0.1 - - [05/Jun/2026 18:06:36] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-29 20:30:55,332 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-29 20:30:55,369 [INFO] [APP] Database module loaded
+2026-06-29 20:30:55,424 [INFO] [APP] Analyzers module loaded
+2026-06-29 20:30:56,799 [INFO] [APP] Visualizer module loaded
+2026-06-29 20:30:56,873 [ERROR] [APP] Database init failed: file is not a database
+2026-06-29 20:30:56,874 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-29 20:30:57,058 [INFO] [APP] Auto-opened browser: http://127.0.0.1:5000
+2026-06-29 20:30:57,299 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.185.224.189:5000
+2026-06-29 20:30:57,311 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-29 20:30:57,550 [ERROR] [HOME] Stats error: file is not a database
+2026-06-29 20:30:57,658 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:57] "GET / HTTP/1.1" 200 -
+2026-06-29 20:30:57,903 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:57] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-06-29 20:30:57,924 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:57] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-06-29 20:30:58,517 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:58] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-29 20:30:59,727 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:59] "[35m[1mGET /dashboard HTTP/1.1[0m" 500 -
+2026-06-29 20:30:59,771 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:59] "GET /dashboard?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-06-29 20:30:59,772 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:59] "GET /dashboard?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-06-29 20:30:59,839 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:59] "GET /dashboard?__debugger__=yes&cmd=resource&f=console.png&s=9e41rn7hrErDGGxhKqwv HTTP/1.1" 200 -
+2026-06-29 20:30:59,861 [INFO] 127.0.0.1 - - [29/Jun/2026 20:30:59] "GET /dashboard?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-06-29 20:31:56,423 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-29 20:31:56,430 [INFO] [APP] Database module loaded
+2026-06-29 20:31:56,433 [INFO] [APP] Analyzers module loaded
+2026-06-29 20:31:57,256 [INFO] [APP] Visualizer module loaded
+2026-06-29 20:31:57,275 [INFO] [APP] Database initialized.
+2026-06-29 20:31:57,275 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-29 20:31:57,391 [INFO] [APP] Auto-opened browser: http://127.0.0.1:5000
+2026-06-29 20:31:57,488 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.185.224.189:5000
+2026-06-29 20:31:57,492 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-29 20:31:57,638 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:57] "GET / HTTP/1.1" 200 -
+2026-06-29 20:31:57,862 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:57] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-29 20:31:57,878 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:57] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-29 20:31:58,444 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:58] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-29 20:31:59,541 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:59] "[35m[1mGET /dashboard HTTP/1.1[0m" 500 -
+2026-06-29 20:31:59,583 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:59] "[36mGET /dashboard?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-06-29 20:31:59,584 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:59] "[36mGET /dashboard?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-06-29 20:31:59,665 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:59] "GET /dashboard?__debugger__=yes&cmd=resource&f=console.png&s=dqQ2dhyn5qolxNgR4AxP HTTP/1.1" 200 -
+2026-06-29 20:31:59,690 [INFO] 127.0.0.1 - - [29/Jun/2026 20:31:59] "[36mGET /dashboard?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-06-29 20:34:27,129 [INFO] [APP] Starting Programming Visualization Platform...
+2026-06-29 20:34:27,137 [INFO] [APP] Database module loaded
+2026-06-29 20:34:27,140 [INFO] [APP] Analyzers module loaded
+2026-06-29 20:34:28,922 [INFO] [APP] Visualizer module loaded
+2026-06-29 20:34:28,946 [INFO] [APP] Database initialized.
+2026-06-29 20:34:28,947 [INFO] [APP] Starting server on 0.0.0.0:5000
+2026-06-29 20:34:29,099 [INFO] [APP] Auto-opened browser: http://127.0.0.1:5000
+2026-06-29 20:34:29,331 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.185.224.189:5000
+2026-06-29 20:34:29,333 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-29 20:34:29,613 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:29] "GET / HTTP/1.1" 200 -
+2026-06-29 20:34:29,947 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-29 20:34:29,950 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-29 20:34:30,542 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:30] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-29 20:34:31,622 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:31] "GET /dashboard HTTP/1.1" 200 -
+2026-06-29 20:34:31,677 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-29 20:34:31,677 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:31] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-29 20:34:31,960 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:31] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2026-06-29 20:34:37,657 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:37] "GET / HTTP/1.1" 200 -
+2026-06-29 20:34:37,722 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:37] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-06-29 20:34:37,725 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:37] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-06-29 20:34:38,040 [INFO] 127.0.0.1 - - [29/Jun/2026 20:34:38] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
